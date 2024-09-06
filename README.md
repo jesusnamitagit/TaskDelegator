@@ -19,11 +19,7 @@ Below you'll find tables for different categories of web development tasks. Each
 
 | Task Name | Description | Technologies | Link |
 |-----------|-------------|--------------|------|
-| Responsive Dashboard | Create a responsive dashboard layout | HTML, CSS, JavaScript | [Link](https://github.com/yourcompany/task-responsive-dashboard) |
-| Interactive Form | Develop a multi-step interactive form | React, Formik | [Link](https://github.com/yourcompany/task-interactive-form) |
-| Data Visualization | Implement charts for data visualization | D3.js, SVG | [Link](https://github.com/yourcompany/task-data-visualization) |
-| Accessibility Audit | Improve accessibility of an existing page | HTML, ARIA, JavaScript | [Link](https://github.com/yourcompany/task-accessibility-audit) |
-| CSS Animation | Create engaging UI animations | CSS, GSAP | [Link](https://github.com/yourcompany/task-css-animation) |
+| Weekoff entry form | Create a responsive weekoff entry layout | HTML, CSS, JavaScript, TailwindCSS | [Link](https://github.com/SparshInnovators/Weekoff-entry-UI/tree/main) |
 
 ## Contributing
 
