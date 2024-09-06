@@ -47,10 +47,11 @@ We welcome contributions to our tasks! Here's how you can get started:
 
 Remember, the goal is both to contribute and to learn. Don't hesitate to ask questions in the task's issue tracker if you need clarification.
 
+<!--- 
 ## Code of Conduct
 
 We expect all contributors to adhere to our Code of Conduct. Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before participating.
-
+--->
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
