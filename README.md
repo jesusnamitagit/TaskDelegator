@@ -21,6 +21,14 @@ Below you'll find tables for different categories of web development tasks. Each
 |-----------|-------------|--------------|------|
 | Weekoff entry form | Create a responsive weekoff entry layout | HTML, CSS, JavaScript, TailwindCSS | [Link](https://github.com/SparshInnovators/Weekoff-entry-UI/tree/main) |
 
+### Functional Tasks
+
+| Task Name | Description | Technologies | Link |
+|-----------|-------------|--------------|------|
+| Simple HR Email Response Tool | Simple HR Email Response Tool | HTML, CSS, JavaScript, TailwindCSS | [Link](https://github.com/SparshInnovators/HR-Email-Response-Tool) |
+| Candidate Technical Assessment System | Candidate Technical Assessment System | HTML, CSS, JavaScript, TailwindCS | [Link](https://github.com/SparshInnovators/Candidate-Technical-Assessment-System/tree/main) |
+
+
 ## Contributing
 
 We welcome contributions to our tasks! Here's how you can get started:
