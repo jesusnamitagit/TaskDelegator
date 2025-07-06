@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week-off Entry System</title>
+    <link rel="stylesheet" href="stylesEntry.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <h1 class="header-title">Week-off Entry System</h1>
+          <p class="header-subtitle">
+            Manage your time-off requests efficiently
+          </p>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Stats Cards -->
+        <section class="stats-section">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon available">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-number">15</h3>
+                <p class="stat-label">Available Days</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon used">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12,6 12,12 16,14" />
+                </svg>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-number">6</h3>
+                <p class="stat-label">Used Days</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon pending">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-number">2</h3>
+                <p class="stat-label">Pending</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="content-grid">
+          <!-- Request Form Section -->
+          <section class="form-section">
+            <div class="section-header">
+              <h2 class="section-title">New Request</h2>
+              <button class="toggle-form-btn" id="toggleFormBtn">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Add Request
+              </button>
+            </div>
+
+            <form class="request-form" id="requestForm" style="display: none">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="startDate">Start Date</label>
+                  <input type="date" id="startDate" name="startDate" required />
+                  <span class="error-message" id="startDateError"></span>
+                </div>
+                <div class="form-group">
+                  <label for="endDate">End Date</label>
+                  <input type="date" id="endDate" name="endDate" required />
+                  <span class="error-message" id="endDateError"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="requestType">Request Type</label>
+                <select id="requestType" name="requestType" required>
+                  <option value="vacation">Vacation</option>
+                  <option value="sick">Sick Leave</option>
+                  <option value="personal">Personal</option>
+                  <option value="emergency">Emergency</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="reason">Reason</label>
+                <textarea
+                  id="reason"
+                  name="reason"
+                  rows="3"
+                  placeholder="Please provide a reason for your time-off request..."
+                  required
+                ></textarea>
+                <span class="error-message" id="reasonError"></span>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                  Submit Request
+                </button>
+                <button type="button" class="btn btn-secondary" id="cancelBtn">
+                  Cancel
+                </button>
+              </div>
+            </form>
+
+            <!-- Requests List -->
+            <div class="requests-section">
+              <h3 class="requests-title">Recent Requests</h3>
+              <div class="requests-list" id="requestsList">
+                <!-- Requests will be populated by JavaScript -->
+              </div>
+            </div>
+          </section>
+
+          <!-- Calendar Section -->
+          <section class="calendar-section">
+            <div class="calendar-header">
+              <button class="nav-btn" id="prevMonth">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="15,18 9,12 15,6" />
+                </svg>
+              </button>
+              <h3 class="calendar-title" id="calendarTitle">January 2024</h3>
+              <button class="nav-btn" id="nextMonth">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="9,18 15,12 9,6" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="calendar">
+              <div class="calendar-weekdays">
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+              </div>
+              <div class="calendar-days" id="calendarDays">
+                <!-- Calendar days will be populated by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Team Status -->
+            <div class="team-status">
+              <h3 class="team-title">Team Status</h3>
+              <div class="team-members">
+                <div class="team-member">
+                  <div class="member-avatar out">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <div class="member-info">
+                    <p class="member-name">Sarah Johnson</p>
+                    <p class="member-status">Out until Jan 19</p>
+                  </div>
+                </div>
+                <div class="team-member">
+                  <div class="member-avatar available">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <div class="member-info">
+                    <p class="member-name">Mike Chen</p>
+                    <p class="member-status">Available</p>
+                  </div>
+                </div>
+                <div class="team-member">
+                  <div class="member-avatar pending">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <div class="member-info">
+                    <p class="member-name">Emily Davis</p>
+                    <p class="member-status">Pending approval</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="scriptEntry.js"></script>
+  </body>
+</html>

@@ -1,0 +1,535 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR Email Response Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#f0f9ff",
+                100: "#e0f2fe",
+                500: "#0ea5e9",
+                600: "#0284c7",
+                700: "#0369a1",
+              },
+              secondary: {
+                50: "#f8fafc",
+                100: "#f1f5f9",
+                500: "#64748b",
+                600: "#475569",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">
+                HR Email Response Tool
+              </h1>
+              <p class="text-sm text-gray-500">
+                Generate professional email responses quickly
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button
+              id="saveTemplateBtn"
+              class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+            >
+              <svg
+                class="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12"
+                ></path>
+              </svg>
+              Save Template
+            </button>
+            <div
+              class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-5 h-5 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Panel - Template Selection -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">
+              Email Templates
+            </h2>
+
+            <!-- Search Templates -->
+            <div class="mb-4">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="templateSearch"
+                  placeholder="Search templates..."
+                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                />
+                <svg
+                  class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Template Categories -->
+            <div class="space-y-2 mb-6">
+              <button
+                class="category-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-primary-50 text-primary-700 border border-primary-200"
+                data-category="all"
+              >
+                All Templates
+              </button>
+              <button
+                class="category-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-gray-50"
+                data-category="interview"
+              >
+                Interview & Recruitment
+              </button>
+              <button
+                class="category-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-gray-50"
+                data-category="leave"
+              >
+                Leave & Time Off
+              </button>
+              <button
+                class="category-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-gray-50"
+                data-category="policy"
+              >
+                Policy & Compliance
+              </button>
+              <button
+                class="category-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-gray-50"
+                data-category="general"
+              >
+                General HR
+              </button>
+            </div>
+
+            <!-- Template List -->
+            <div id="templateList" class="space-y-2 max-h-96 overflow-y-auto">
+              <!-- Templates will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-6"
+          >
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">
+              Quick Actions
+            </h3>
+            <div class="space-y-3">
+              <button
+                class="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+              >
+                <svg
+                  class="w-4 h-4 mr-3 text-blue-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  ></path>
+                </svg>
+                Create New Template
+              </button>
+              <button
+                class="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+              >
+                <svg
+                  class="w-4 h-4 mr-3 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12"
+                  ></path>
+                </svg>
+                Import Templates
+              </button>
+              <button
+                class="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+              >
+                <svg
+                  class="w-4 h-4 mr-3 text-purple-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  ></path>
+                </svg>
+                View Analytics
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel - Email Composer -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+            <!-- Email Header -->
+            <div class="p-6 border-b border-gray-200">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-900">
+                  Compose Email
+                </h2>
+                <div class="flex space-x-2">
+                  <button
+                    id="previewBtn"
+                    class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    Preview
+                  </button>
+                  <button
+                    id="copyBtn"
+                    class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                    Copy
+                  </button>
+                  <button
+                    id="sendBtn"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                      ></path>
+                    </svg>
+                    Send Email
+                  </button>
+                </div>
+              </div>
+
+              <!-- Email Fields -->
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      for="recipientEmail"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >To</label
+                    >
+                    <input
+                      type="email"
+                      id="recipientEmail"
+                      placeholder="recipient@company.com"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="recipientName"
+                      class="block text-sm font-medium text-gray-700 mb-1"
+                      >Recipient Name</label
+                    >
+                    <input
+                      type="text"
+                      id="recipientName"
+                      placeholder="John Doe"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    for="emailSubject"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Subject</label
+                  >
+                  <input
+                    type="text"
+                    id="emailSubject"
+                    placeholder="Email subject..."
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Body -->
+            <div class="p-6">
+              <label
+                for="emailBody"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Email Content</label
+              >
+              <textarea
+                id="emailBody"
+                rows="12"
+                placeholder="Start typing your email or select a template from the left panel..."
+                class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
+              ></textarea>
+
+              <!-- Variable Placeholders -->
+              <div class="mt-4">
+                <h4 class="text-sm font-medium text-gray-700 mb-2">
+                  Available Variables
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    class="variable-btn px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md hover:bg-gray-200 transition-colors"
+                    data-variable="{{recipientName}}"
+                  >
+                    {{recipientName}}
+                  </button>
+                  <button
+                    class="variable-btn px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md hover:bg-gray-200 transition-colors"
+                    data-variable="{{companyName}}"
+                  >
+                    {{companyName}}
+                  </button>
+                  <button
+                    class="variable-btn px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md hover:bg-gray-200 transition-colors"
+                    data-variable="{{position}}"
+                  >
+                    {{position}}
+                  </button>
+                  <button
+                    class="variable-btn px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md hover:bg-gray-200 transition-colors"
+                    data-variable="{{date}}"
+                  >
+                    {{date}}
+                  </button>
+                  <button
+                    class="variable-btn px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md hover:bg-gray-200 transition-colors"
+                    data-variable="{{hrName}}"
+                  >
+                    {{hrName}}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Footer -->
+            <div
+              class="px-6 py-4 bg-gray-50 border-t border-gray-200 rounded-b-xl"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <span class="text-sm text-gray-500"
+                    >Word count: <span id="wordCount">0</span></span
+                  >
+                  <span class="text-sm text-gray-500"
+                    >Characters: <span id="charCount">0</span></span
+                  >
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button
+                    id="clearBtn"
+                    class="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                  >
+                    Clear
+                  </button>
+                  <button
+                    id="resetBtn"
+                    class="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Templates -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-6"
+          >
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">
+              Recently Used Templates
+            </h3>
+            <div
+              id="recentTemplates"
+              class="grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              <!-- Recent templates will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div
+      id="previewModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4"
+    >
+      <div
+        class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
+      >
+        <div
+          class="flex items-center justify-between p-6 border-b border-gray-200"
+        >
+          <h3 class="text-lg font-semibold text-gray-900">Email Preview</h3>
+          <button
+            id="closePreviewBtn"
+            class="text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-6 overflow-y-auto max-h-96">
+          <div id="previewContent" class="prose max-w-none">
+            <!-- Preview content will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div
+      id="toast"
+      class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="flex items-center space-x-2">
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
+          ></path>
+        </svg>
+        <span id="toastMessage">Success!</span>
+      </div>
+    </div>
+
+    <script src="scriptHr.js"></script>
+  </body>
+</html>
